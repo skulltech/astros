@@ -2,8 +2,6 @@
 import Link from "@components/ui/link.astro";
 import Button from "@components/ui/button.astro";
 import { Icon } from "astro-icon";
-import { localizePath } from "astro-i18next";
-import { t } from "i18next";
 
 export const menuitems = [
 	{
@@ -15,18 +13,21 @@ export const menuitems = [
 		],
 	},
 	{
-		title: "header.pricing",
+		title: "Pricing",
 		path: "/pricing",
 	},
 	{
-		title: "header.blog",
+		title: "Blog",
 		path: "/blog",
 	},
 	{
-		title: "header.contact",
+		title: "Contact",
 		path: "/contact",
 	},
 ];
+
+const primaryButtonText = "Download";
+const secondaryButtonText = "Login";
 ---
 
 <div
@@ -34,7 +35,7 @@ export const menuitems = [
 	class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8 z-10 md:pt-2 relative">
 	<div class="p-4 flex flex-row items-center justify-between">
 		<a
-			href={localizePath("/")}
+			href="/"
 			class="flex gap-3 items-center text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
 			<Icon name="logo" width="30" class="dark:invert" alt="Logo"></Icon>
 			Astros
@@ -76,7 +77,7 @@ export const menuitems = [
 					item.children && item.children.length ? (
 						<div @click.away="open = false" class="relative" x-data="{ open: false }">
 							<Button @click="open = !open" style="link" size="sm" class="mt-[2px]">
-								{t(item.title)}
+								{item.title}
 								<svg
 									fill="currentColor"
 									viewBox="0 0 20 20"
@@ -101,7 +102,7 @@ export const menuitems = [
 								<div class="px-2 py-2 rounded-md shadow dark:bg-gray-800">
 									{ item.children.map((subitem) =>
 										<Link
-											href={localizePath(subitem.path)}
+											href={subitem.path}
 											style="hover"
 											size="sm"
 											class="block"
@@ -127,7 +128,7 @@ export const menuitems = [
 						</div>
 					) : (
 						<Link
-							href={localizePath(item.path)}
+							href={item.path}
 							style="hover"
 							size="sm"
 							x-data="{ isActive: false }"
@@ -145,7 +146,7 @@ export const menuitems = [
 							:class="{ 'bg-gray-200 dark:bg-gray-600': isActive }"
 							data-path={item.path}
 						>
-							{t(item.title)}
+							{item.title}
 						</Link>
 					)
 				)
@@ -153,10 +154,10 @@ export const menuitems = [
 		</div>
 		<div class="mt-4 md:mt-0 flex flex-col md:flex-row gap-4">
 			<Link href="/login" style="outline" class="md:px-3 md:py-2 leading-6">
-				{t("header.secondary_button_text")}
+				{secondaryButtonText}
 			</Link>
 			<Link href="https://github.com/zankhq/astros" class="md:px-3 md:py-2 leading-6">
-				{t("header.primary_button_text")}
+				{primaryButtonText}
 			</Link>
 		</div>
 	</nav>

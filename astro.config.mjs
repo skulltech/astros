@@ -5,7 +5,6 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { autolinkConfig } from "./plugins/rehype-autolink-config";
 import rehypeSlug from "rehype-slug";
 import NetlifyCMS from "astro-netlify-cms";
-import astroI18next from "astro-i18next";
 import alpinejs from "@astrojs/alpinejs";
 import AstroPWA from "@vite-pwa/astro";
 
@@ -122,7 +121,6 @@ export default defineConfig({
 			},
 			disableIdentityWidgetInjection: true,
 		}),
-		astroI18next(),
 		alpinejs(),
 		AstroPWA({
 			mode: "production",
