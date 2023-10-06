@@ -2,7 +2,6 @@
 import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
-import { pwaInfo } from "virtual:pwa-info";
 import "@fontsource-variable/inter";
 import { ViewTransitions } from "astro:transitions";
 
@@ -15,16 +14,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
 const resolvedImageWithDomain = new URL("/meta/opengraph.png", Astro.site).toString();
 
-// replaced dynamically
-const buildDate = __DATE__;
+const { title = null } = Astro.props;
 
-const { title } = Astro.props;
-
-const makeTitle = title ? title + " | " + "Astros" : "Astros - Starter Template for Astro with Tailwind CSS";
+const makeTitle = title ? title + " | " + "Turbine" : "Turbine - Automated Data Pipeline for Your AI Apps";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -39,23 +35,23 @@ const makeTitle = title ? title + " | " + "Astros" : "Astros - Starter Template 
 
 		<SEO
 			title={makeTitle}
-			description="Astros is a starter website template for Astro built with TailwindCSS and alpine js."
+			description="Turbine is the solution for automating the data pipeline of your AI apps. It offers real-time semantic search over any database. It fetches changes from your database, creates vector embeddings, and stores them for efficient vector search."
 			canonical={canonicalURL}
 			openGraph={{
 				basic: {
 					url: canonicalURL,
 					type: "website",
-					title: `Astros - Starter Template for Astro`,
+					title: "Turbine - Automated Data Pipeline for Your AI Apps",
 					image: resolvedImageWithDomain,
 				},
 				image: {
-					alt: "Astros Homepage Screenshot",
+					alt: "Turbine Homepage Screenshot",
 				},
 			}}
 		/>
-
-		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
-		<script src="/src/pwa.ts"></script>
+		<!--Ionicons -->
+		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+		<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
 	</head>
 	<body class="dark:bg-stone-950">
 		<Navbar />

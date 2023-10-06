@@ -1,14 +1,12 @@
 {
-	"name": "astros",
+	"name": "turbine-landing",
 	"type": "module",
 	"version": "1.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "astro dev --host",
 		"start": "astro dev",
 		"build": "astro build",
-		"preview": "astro preview",
-		"pwa:generate-assets": "pwa-assets-generator --preset minimal public/logo.svg"
+		"preview": "astro preview"
 	},
 	"dependencies": {
 		"@astrojs/alpinejs": "^0.3.0",
@@ -29,8 +27,6 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.9",
-		"@vite-pwa/assets-generator": "^0.0.9",
-		"@vite-pwa/astro": "^0.1.2",
 		"prettier": "3.0.3",
 		"prettier-plugin-astro": "^0.12.0",
 		"rehype": "^13.0.1",

@@ -1,34 +1,68 @@
 ---
-import { Tick } from "@components/ui/icons";
 import Link from "@components/ui/link.astro";
+import CheckMark from "@components/icons/checkmark.astro";
 
-const { plan } = Astro.props;
+const title = "Pricing";
+const subtitle = "Choose the plan that works for you.";
+
+const plans = [
+	{
+		name: "Starter",
+		description: "For small businesses or personal use. Or maybe you just want to try Turbine out.",
+		price: 50,
+		features: ["Connect 1 database", "Process upto 100k documents per month", "Regular support", "10 days of free trial"],
+		link: "https://buy.stripe.com/7sI7suajW6Es12g6op",
+		cta: "Get started",
+	},
+	{
+		name: "Premium",
+		description: "For larger businesses looking to grow and scale.",
+		price: null,
+		features: ["Connect upto 10 databases", "Process upto 10M documents per month", "Priority support", "Feature requests"],
+		link: "mailto:hello@useturbine.com",
+		cta: "Contact Us",
+	},
+];
 ---
 
-<div class="rounded-md p-8 xl:p-10 ring-1 ring-gray-200 dark:bg-stone-950 dark:ring-gray-700">
-	<div class="flex items-center justify-between gap-x-4">
-		<h3 id="tier-enterprise" class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">{plan.name}</h3>
+<section id="pricing">
+	<div class="py-8 px-4 mx-auto max-w-screen-md lg:py-16 lg:px-6">
+		<div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+			<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{title}</h2>
+			<p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">
+				{subtitle}
+			</p>
+		</div>
+		<div class="space-y-8 lg:grid lg:grid-cols-2 sm:gap-6 xl:gap-10 lg:space-y-0">
+			{
+				plans.map((plan) => (
+					<div class="flex flex-col justify-between p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+						<div>
+							<h3 class="mb-4 text-2xl font-semibold">{plan.name}</h3>
+							<p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{plan.description}</p>
+							<div class="flex justify-center items-baseline my-8">
+								{plan.price && (
+									<>
+										<span class="mr-2 text-5xl font-extrabold">${plan.price}</span>
+										<span class="text-gray-500 dark:text-gray-400">/month</span>
+									</>
+								)}
+							</div>
+						</div>
+						<div>
+							<ul role="list" class="mb-8 space-y-4 text-left">
+								{plan.features.map((feature) => (
+									<li class="flex items-center space-x-3">
+										<CheckMark />
+										<span>{feature}</span>
+									</li>
+								))}
+							</ul>
+							<Link href={plan.link}>{plan.cta}</Link>
+						</div>
+					</div>
+				))
+			}
+		</div>
 	</div>
-	<p class="mt-6 flex items-baseline gap-x-1">
-		<span class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-			{plan.price && typeof plan.price === "object" ? plan.price.monthly : plan.price}
-		</span>
-	</p>
-	<Link href="#" aria-describedby="tier-enterprise" style="outline" class="block w-full mt-6">{plan.button.text || "Get Started"}</Link>
-	<ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-300 xl:mt-10">
-		{
-			plan.features.map((item) => (
-				<li class="flex gap-x-3">
-					<svg class="h-6 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-						<path
-							fill-rule="evenodd"
-							d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-					{item}
-				</li>
-			))
-		}
-	</ul>
-</div>
+</section>
